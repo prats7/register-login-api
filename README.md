@@ -18,7 +18,7 @@ It is NodeJS ,MongoDB app(Backend) where user can register and login using APIs,
 
     * **Login**
         - API : http://localhost:5000/api/auth (check localhost server for port)
-        - Headers : Content-type -> application/json
+        - Headers : Content-type -> application/json , x-auth-token -> jsonwebtoken
         - Body : raw JSON -> { "email":"" , "password":""}
 
 
