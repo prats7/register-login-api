@@ -1,17 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 
 const app = express();
 
 //Bodyparser Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 //Connect to db
 const db = require('./config/mongoose');
 
-
-
+//Use Routes
+app.use('/api/users', require('./routes/api/user'));
 
 //Express server
 const PORT =  process.env.PORT || 5000 ;
