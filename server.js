@@ -10,7 +10,8 @@ app.use(express.json());
 const db = require('./config/mongoose');
 
 //Use Routes
-app.use('/api/users', require('./routes/api/user'));
+app.use('/api/user', require('./routes/api/user'));
+app.use('/api/auth', require('./routes/api/auth'));
 
 //Express server
 const PORT =  process.env.PORT || 5000 ;
