@@ -1,15 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
-
+const bodyParser = require('body-parser');
 
 const app = express();
 
 //Bodyparser Middleware
-app.use(express.json());
+app.use(bodyParser.json());
 
-// //Connect to db
-// const db = require('./config/mongoose');
+//Connect to db
+const db = require('./config/mongoose');
 
 
 
