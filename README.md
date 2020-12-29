@@ -33,5 +33,5 @@ It is NodeJS ,MongoDB app(Backend) where user can register and login using APIs,
 
 ---
 
-### AUTHORS:
+### AUTHORs:
 Pratyush Vishal - [GitHub](https://github.com/prats7)

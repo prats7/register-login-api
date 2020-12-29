@@ -2,9 +2,17 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const router =  express.Router();
 const jwt = require('jsonwebtoken');
+const assert = require('assert');
+const results = require('../../LoginResponse/loginResponseEnum');
+
+//Results
+const success = results.SUCCESS();
+const fail = results.FAIL();
+
 
 //User model
-const User = require('../../models/User')
+const User = require('../../models/User');
+
 
 // @route GET api/users
 // @route  Register new user
@@ -14,13 +22,23 @@ router.post('/',(req, res) => {
 
     //validation
     if(!name || !email || !password){
-        return res.status(400).json({msg: 'Please enter all fields'});
+        return (
+            //res.status(400).json({msg: 'Please enter all fields'});
+            jwt.sign(
+                res.status(400).json({msg: 'Please enter all field'}), () => { assert.strictEqual(fail,'Please enter all field')}
+            )
+        )
     }
 
     //Find user
     User.findOne({ email })
     .then(user => {
-        if(user) return res.status(400).json({ msg : "User already exists "});
+        if(user) return (
+            //res.status(400).json({ msg : "User already exists "})
+            jwt.sign(
+                res.status(400).json({msg: 'User already exist'}), () => { assert.strictEqual(fail,'User already exist')}
+            )
+        )
 
         const newUser = new User({
             name,
@@ -40,7 +58,7 @@ router.post('/',(req, res) => {
                         { id: user.id },
                         "secret",
                         (err , token ) => {
-                            if(err) throw err;
+                            if(err) assert.throws(fail,err);
                             res.json({
                                 token,
                                 user: {
@@ -49,7 +67,7 @@ router.post('/',(req, res) => {
                                     email: user.email
                                 }
                             })
-                        }
+                        },() => { assert.strictEqual(success,"SUCCESS ")}
                     )
 
                     
